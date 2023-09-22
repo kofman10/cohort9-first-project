@@ -5,7 +5,7 @@ import { useTodoContext } from "./TodoContext";
 import "./App.css";
 
 function App() {
-    const { todos, setTodos, editId, setEditId } = useTodoContext(); 
+    const { todos, setTodos, editId } = useTodoContext(); 
   
     useEffect(() => {
       let canceled = false;

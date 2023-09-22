@@ -1,6 +1,9 @@
+import { useTodoContext } from "../TodoContext"; // Import the context
 
 
-const TodoItem = ({ todo, handleCheck, handleEdit, handleDelete, editId }) => {
+const TodoItem = ({todo, handleCheck, handleEdit, handleDelete }) => {
+    const { editId, setEditId } = useTodoContext();
+
     return (
       <li className="todo" key={todo.id}>
         <input
@@ -16,11 +19,11 @@ const TodoItem = ({ todo, handleCheck, handleEdit, handleDelete, editId }) => {
           </span>
         )}
         {editId === todo.id ? (
-          <button onClick={() => handleEdit(null)}>✅</button>
+          <button onClick={() =>setEditId(todo.id)}>✅</button>
         ) : (
           <button
             className="del-button"
-            onClick={() => handleEdit(todo.id)}
+            onClick={() =>setEditId(todo.id)}
             disabled={todo.completed}
           >
             ✏️

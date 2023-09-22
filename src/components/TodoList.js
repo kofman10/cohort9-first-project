@@ -1,6 +1,10 @@
 import TodoItem from "./TodoItem";
+import { useTodoContext } from "../TodoContext"; // Import the context
 
-function TodoList({ todos, handleCheck, handleEdit, handleDelete, editId }) {
+
+function TodoList({  handleCheck, handleEdit, handleDelete, editId }) {
+    const {  todos  } = useTodoContext();
+
     return (
       <ul>
         {!!todos.length &&
