@@ -2,25 +2,9 @@ import { useTodoContext } from "../TodoContext";
 
 
 const TodoItem = ({todo, handleCheck, handleEdit, handleDelete }) => {
-    const { editId, setEditId, todos } = useTodoContext();
+    const { editId, setEditId } = useTodoContext();
 
-    const isEditing = (id) => id === editId;
 
-    const canEdit = (id) => !isEditing(id) && !todos.find((todo) => todo.id === id).completed;
-  
-    const handleSubmitEdit = (id) => {
-      const editedTodo = todos.find((todo) => todo.id === id);
-      if (editedTodo.title.trim() === "") {
-        // Don't allow empty string as a title
-        return;
-      }
-      handleEdit(id);
-      setEditId(null);
-      if (editedTodo.completed) {
-        // If a completed todo is edited, make it uncompleted
-        handleCheck(id);
-      }
-    };
 
     return (
       <li className="todo" key={todo.id}>
@@ -36,7 +20,7 @@ const TodoItem = ({todo, handleCheck, handleEdit, handleDelete }) => {
             {todo.title}
           </span>
         )}
-        {editId === todo.id ? (
+        {editId === todo.id && todo.title !== "" ? (
           <button onClick={() =>setEditId(null)}>✅</button>
         ) : (
           <button

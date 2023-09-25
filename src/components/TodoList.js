@@ -3,7 +3,6 @@ import { useTodoContext } from "../TodoContext";
 
 
 function TodoList({  handleCheck, handleEdit, handleDelete, filteredTodos}) {
-    const {  todos  } = useTodoContext();
 
     return (
       <ul>

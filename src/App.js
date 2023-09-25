@@ -65,7 +65,7 @@ function App() {
       } else if (activeTab === "Uncompleted") {
         return !todo.completed;
       }
-      return true; // "All" tab, return all todos
+      return true; 
     });
 
   
