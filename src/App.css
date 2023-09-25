@@ -19,3 +19,10 @@
     text-decoration: line-through;
     color: red;
 }
+
+.tabs {
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
