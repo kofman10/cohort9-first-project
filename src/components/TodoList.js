@@ -7,7 +7,7 @@ function TodoList({  handleCheck, handleEdit, handleDelete, filteredTodos}) {
 
     return (
       <ul>
-        {filteredTodos.length &&
+        {filteredTodos.length ?
           filteredTodos.map((todo) => (
             <TodoItem
               key={todo.id}
@@ -16,7 +16,7 @@ function TodoList({  handleCheck, handleEdit, handleDelete, filteredTodos}) {
               handleEdit={handleEdit}
               handleDelete={handleDelete}    
             />
-          ))}
+          )): <p>No Todo Created yet</p>}
       </ul>
     );
   }

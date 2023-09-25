@@ -5,7 +5,7 @@ import { useTodoContext } from "./TodoContext";
 import "./App.css";
 
 function App() {
-    const { todos, setTodos, editId, activeTab, setActiveTab } = useTodoContext(); 
+    const { todos, setTodos, editId, activeTab, setActiveTab, setEditId } = useTodoContext(); 
   
     useEffect(() => {
       let canceled = false;
@@ -67,6 +67,7 @@ function App() {
       }
       return true; // "All" tab, return all todos
     });
+
   
     return (
       <div className="App">
