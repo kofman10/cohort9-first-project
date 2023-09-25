@@ -1,14 +1,17 @@
 import { useTodoContext } from "../TodoContext"; 
-import { useState } from "react";
 
 const TodoItem = ({todo, handleCheck, handleEdit, handleDelete }) => {
-    const { editId, setEditId } = useTodoContext();
-    const [isInputFocused, setInputFocus] = useState(false);
+    const { editId, setEditId, isInputFocused, setInputFocus } = useTodoContext();
 
     const handleInputFocus = () => {
       setInputFocus(true);
     };
-
+    const handleSubmitEdit = () => {
+      if (todo.title.trim() !== "") {
+        setEditId(null);
+        setInputFocus(false);
+      }
+    };
     return (
       <li className="todo" key={todo.id}>
         <input
@@ -16,10 +19,10 @@ const TodoItem = ({todo, handleCheck, handleEdit, handleDelete }) => {
           checked={todo.completed}
           onChange={() => handleCheck(todo.id)}
           disabled={isInputFocused}
-
         />
         {editId === todo.id ? (
-          <input type="text" value={todo.title} onChange={handleEdit}  onFocus={handleInputFocus}
+          <input type="text" value={todo.title} onChange={handleEdit}   onBlur={handleSubmitEdit}
+          onFocus={handleInputFocus}
           />
         ) : (
           <span className={`todo-title ${todo.completed && "checked"}`}>
