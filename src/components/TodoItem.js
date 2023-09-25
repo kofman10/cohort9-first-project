@@ -25,38 +25,31 @@ const TodoItem = ({todo, handleCheck, handleEdit, handleDelete }) => {
     return (
       <li className="todo" key={todo.id}>
         <input
-                  type="checkbox"
-                  checked={todo.completed}
-                  onChange={() => handleCheck(todo.id)}
-                />
-                {isEditing(todo.id) ? (
-                  <input
-                    type="text"
-                    value={todo.title}
-                    onChange={(e) => handleEdit(e, todo.id)}
-                  />
-                ) : (
-                  <span className={`todo-title ${todo.completed && "checked"}`}>
-                    {todo.title}
-                  </span>
-                )}
-                {isEditing(todo.id) ? (
-                  <button onClick={() => handleSubmitEdit(todo.id)}>✅</button>
-                ) : (
-                  <button
-                    className="del-button"
-                    onClick={() => setEditId(todo.id)}
-                    disabled={!canEdit(todo.id)}
-                  >
-                    ✏️
-                  </button>
-                )}
-                <button
-                  className="del-button"
-                  onClick={() => handleDelete(todo.id)}
-                >
-                  🗑️
-                </button>
+          type="checkbox"
+          checked={todo.completed}
+          onChange={() => handleCheck(todo.id)}
+        />
+        {editId === todo.id ? (
+          <input type="text" value={todo.title} onChange={handleEdit} />
+        ) : (
+          <span className={`todo-title ${todo.completed && "checked"}`}>
+            {todo.title}
+          </span>
+        )}
+        {editId === todo.id ? (
+          <button onClick={() =>setEditId(null)}>✅</button>
+        ) : (
+          <button
+            className="del-button"
+            onClick={() =>setEditId(todo.id)}
+            disabled={todo.completed}
+          >
+            ✏️
+          </button>
+        )}
+        <button className="del-button" onClick={() => handleDelete(todo.id)}>
+          🗑️
+        </button>
       </li>
     );
   }
