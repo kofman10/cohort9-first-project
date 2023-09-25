@@ -5,7 +5,7 @@ import { useTodoContext } from "./TodoContext";
 import "./App.css";
 
 function App() {
-    const { todos, setTodos, editId } = useTodoContext(); 
+    const { todos, setTodos, editId, activeTab, setActiveTab } = useTodoContext(); 
   
     useEffect(() => {
       let canceled = false;
@@ -36,9 +36,8 @@ function App() {
       newTodos.splice(targetTodoIndex, 1);
       setTodos(newTodos);
     };
-  
     const handleEdit = (e) => {
-      const newTodos = todos.map((todo) =>
+      const newTodos = todos.map((todo) => 
         todo.id === editId ? { ...todo, title: e.target.value } : todo
       );
       setTodos(newTodos);
@@ -49,22 +48,39 @@ function App() {
       const newTodo = {
         completed: false,
         id: maxId + 1,
-        title: "New Todo",
+        title: "",
         userId: 1,
       };
       const newTodos = [...todos, newTodo];
       setTodos(newTodos);
     };
+
+    const handleTabChange = (tab) => {
+      setActiveTab(tab);
+    };
+
+    const filteredTodos = todos.filter((todo) => {
+      if (activeTab === "Completed") {
+        return todo.completed;
+      } else if (activeTab === "Uncompleted") {
+        return !todo.completed;
+      }
+      return true; // "All" tab, return all todos
+    });
   
     return (
       <div className="App">
+           <div className="tabs">
+        <button onClick={() => handleTabChange("All")}>All</button>
+        <button onClick={() => handleTabChange("Completed")}>Completed</button>
+        <button onClick={() => handleTabChange("Uncompleted")}>Uncompleted</button>
+      </div>
         <div className="todo-wrapper">
           <TodoList
-            todos={todos}
             handleCheck={handleCheck}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
-            editId={editId}
+            filteredTodos={filteredTodos}
           />
           <CreateTodoButton addTodo={addTodo} />
         </div>

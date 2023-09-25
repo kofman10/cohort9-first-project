@@ -1,21 +1,20 @@
 import TodoItem from "./TodoItem";
-import { useTodoContext } from "../TodoContext"; // Import the context
+import { useTodoContext } from "../TodoContext"; 
 
 
-function TodoList({  handleCheck, handleEdit, handleDelete, editId }) {
+function TodoList({  handleCheck, handleEdit, handleDelete, filteredTodos}) {
     const {  todos  } = useTodoContext();
 
     return (
       <ul>
-        {!!todos.length &&
-          todos.map((todo) => (
+        {filteredTodos.length &&
+          filteredTodos.map((todo) => (
             <TodoItem
               key={todo.id}
               todo={todo}
               handleCheck={handleCheck}
               handleEdit={handleEdit}
-              handleDelete={handleDelete}
-              editId={editId}
+              handleDelete={handleDelete}    
             />
           ))}
       </ul>
